@@ -1,6 +1,7 @@
 :: Index ::
 
 - sizes tables (int, double ...)
+- Complexity Table with times
 - ASCII table
 - IO:
     - python io
@@ -43,7 +44,17 @@
 - Graphs:
     + BFS
     + DFS
+    - Flood Fill
+    - Testing bipartite
+    - Reverse Graph
+    - Strong Connectivity
+    - Topological Ordering
+    - Stong Connected Components
     + Dijkstra
+    - Minimun Spanning Tree
+    - Bellman Ford Shortest Path
+    - A* path finding
+
 
 - Hash:
 
@@ -78,6 +89,30 @@
     + Prime Numbers (Sieve of Eratosthenes)
     - Co Prime Numbers (Euler's totient function)
 
+
+:: Problem Solving Templates ::
+
+- Divide and Conquer
+    - Merge Count/Count Inversions
+    - Closest Pair of Points
+    - Integer Multiplication
+    - Matrix Multiplcation
+
+- Greedy Algorithms
+    - Coin Change
+    - Interval Scheduling
+    - Interval Partitioning
+    - Scheduling to Minimize Lateness
+    - Scheduling to Minimize Lateness with Weights
+
+- Dynamic Programming
+    - Weighted Interval Scheduling
+    - Max 1D Range Sum
+    - Max 2D Range Sum
+    - Longest Increasing Subsquence
+    - Knapsack
+    - Coin Change
+    - Traveler Salesman
 
 
 ::Snippets::
