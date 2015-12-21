@@ -41,24 +41,19 @@ Usage:
 
 .. code-block:: cpp
 
-    int main()
+    priority_queue<Object> pq;
+
+    pq.push(Object(1, 2));
+    pq.push(Object(3, 2));
+    pq.push(Object(4, 2));
+    pq.push(Object(1, 7));
+    pq.push(Object(3, 8));
+    pq.push(Object(2, 9));
+
+    while(!pq.empty())
     {
-        priority_queue<Object> pq;
-
-        pq.push(Object(1, 2));
-        pq.push(Object(3, 2));
-        pq.push(Object(4, 2));
-        pq.push(Object(1, 7));
-        pq.push(Object(3, 8));
-        pq.push(Object(2, 9));
-
-        while(!pq.empty())
-        {
-            cout << pq.top().a << " " << pq.top().b << endl;
-            pq.pop();
-        }
-
-        return 0;
+        cout << pq.top().a << " " << pq.top().b << endl;
+        pq.pop();
     }
 
 

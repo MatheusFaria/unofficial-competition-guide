@@ -15,8 +15,11 @@ public:
 
     BinaryMinHeap(int s)
     {
-        // Complexity: O(1)
-        // 0 is sentinel
+        /*
+            Obs: 0 is sentinel
+            Complexity: O(1)
+        */
+
         max_size = s + 1;
         size = 0;
 
@@ -139,7 +142,9 @@ private:
 
     inline int get_lowest_child_index(int index)
     {
-        // Complexity: O(1)
+        /*
+            Complexity: O(1)
+        */
 
         int lowest_child_index = left_child(index);
 
