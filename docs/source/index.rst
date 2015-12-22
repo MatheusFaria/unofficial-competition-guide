@@ -6,14 +6,15 @@
 Unofficial Competition Guide
 ============================
 
-The porpouse of this guide is to help students in programming competitions. It 
+The porpouse of this guide is to help students in programming competitions. It
 is composed by several implementations, **most** of them was tested. The ones
 that weren't tested have a **NOT TESTED** label at the page top. And the ones
 that were there will be a label indicading which questions that implementation
 was tested.
 
 Those implementations can be not the best implementation, feel free to contribute
-with improvement and new algortihms.
+with improvements and new algortihms. And if you find any bug report on the
+issue tracker.
 
 This guide structure is based on the `Competitive Programming Book <http://cpbook.net/>`_.
 For each chapter there is a section with the implementations. There an addtional
