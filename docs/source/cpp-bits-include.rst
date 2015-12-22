@@ -4,6 +4,10 @@ Bits Header
 .. role:: cpp(code)
    :language: cpp
 
+.. attention::
+    This header is implemented only on GCC, which is the compiler that most of
+    the judges uses.
+
 If you :cpp:`#include <bits/stdc++.h>` on your code, it will include most of the
 libs that everyone uses in a competition. All STL libs, the algorithm lib, limits,
 etc. Below you can see the list of libs:
