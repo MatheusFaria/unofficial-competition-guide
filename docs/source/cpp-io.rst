@@ -39,11 +39,3 @@ Basic Output
 I/O Manipulation
 ----------------
 
-
-Extra C++ Content
------------------
-
-.. toctree::
-   :maxdepth: 2
-
-   cpp-extra-content
