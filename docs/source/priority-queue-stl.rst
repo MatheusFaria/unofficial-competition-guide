@@ -100,4 +100,4 @@ With C++ basic objects
 
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
