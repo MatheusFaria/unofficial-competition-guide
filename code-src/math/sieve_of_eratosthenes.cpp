@@ -6,6 +6,11 @@ using namespace std;
 
 vector<int> sieve_of_eratosthenes(int N)
 {
+    /*
+        Finds all primes until N
+
+        Complexity: O(sqrt(n)/log n)
+    */
     vector<int> primes;
     bool * is_prime = new bool[N + 1];
     memset(is_prime, 1, (N + 1)*sizeof(bool));
@@ -34,3 +39,7 @@ int main()
     cout << endl;
     return 0;
 }
+
+/*
+    Tested on: UVA10392
+*/
