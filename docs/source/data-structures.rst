@@ -9,6 +9,5 @@ structures.
    :maxdepth: 2
 
    heaps
-   queues
    sets
    trees
