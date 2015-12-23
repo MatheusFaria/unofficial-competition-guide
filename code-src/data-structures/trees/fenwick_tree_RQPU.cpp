@@ -43,6 +43,8 @@ public:
                         tree -> {x, 14, 18, 0, 23, 6}
 
                 # position 1 influence 1, 2, 4
+
+            Complexity: O(log n)
         */
 
         // While didn't reach the tree root
@@ -59,6 +61,8 @@ public:
     {
         /*
             RSQ (Range Sum Query): returns the sum of the range [intial, final]
+
+            Complexity: O(log n)
         */
 
         // if the range starts with 1 -> [1, final]
@@ -104,3 +108,7 @@ int main()
 
     return 0;
 }
+
+/*
+    Tested on: UVA12086, URI1804
+*/

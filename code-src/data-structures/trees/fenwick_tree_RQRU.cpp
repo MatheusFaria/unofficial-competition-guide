@@ -27,6 +27,8 @@ public:
     {
         /*
             range_update: updates a range [left, right] by adding a value
+
+            Complexity: O(log n)
         */
 
         // Updating the first tree just like a RQPU Fenwick tree
@@ -43,6 +45,8 @@ public:
     {
         /*
             RSQ (Range Sum Query): returns the sum of the range [intial, final]
+
+            Complexity: O(log n)
         */
 
         // if the range starts with 1 -> [1, final]
@@ -93,6 +97,8 @@ private:
                         tree -> {x, 14, 18, 0, 23, 6}
 
                 # position 1 influence 1, 2, 4
+
+            Complexity: O(log n)
         */
 
         // While didn't reach the tree root
@@ -152,3 +158,7 @@ int main()
 
     return 0;
 }
+
+/*
+    Tested on: URI1500
+*/

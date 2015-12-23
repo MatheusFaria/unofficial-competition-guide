@@ -23,6 +23,7 @@ public:
     {
         /*
             range_update: updates a range [left, right] by adding a value
+            Complexity: O(log n)
         */
 
         point_update(tree, left, value);
@@ -33,6 +34,7 @@ public:
     {
         /*
             point_query: returns the value of a point in the tree
+            Complexity: O(log n)
         */
 
         long long int sum = 0;
@@ -73,6 +75,8 @@ private:
                         tree -> {x, 14, 18, 0, 23, 6}
 
                 # position 1 influence 1, 2, 4
+
+            Complexity: O(log n)
         */
 
         // While didn't reach the tree root

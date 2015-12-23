@@ -7,3 +7,4 @@ In this section you can find several different implementations of trees.
    :maxdepth: 2
 
    segment-tree
+   fenwick-tree
