@@ -168,8 +168,7 @@ Binary Heap
 
 
 
-Usage
------
+Usage:
 
 .. code-block:: cpp
 
