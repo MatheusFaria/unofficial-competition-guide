@@ -1,6 +1,9 @@
 Segment Tree
 ============
 
+Standard
+--------
+
 .. note::
 
     Tested on: UVA10324
@@ -76,6 +79,9 @@ the `+` operator to update the values, and change it to other operator.
 
         return 0;
     }
+
+Lazy Propagation
+----------------
 
 .. toctree::
    :maxdepth: 2

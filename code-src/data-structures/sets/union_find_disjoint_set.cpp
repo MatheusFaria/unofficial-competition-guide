@@ -25,6 +25,8 @@ public:
     {
         /*
             find_set: returns the root of the set that x belongs
+
+            Complexity: worst case O(N), but it is amortized with the usage
         */
 
         int root = parents[x];
@@ -51,6 +53,8 @@ public:
     {
         /*
             same_set: checks if x and y belong to the same set
+
+            Complexity: O(N) because if find_set (time amortization)
         */
 
         return find_set(x) == find_set(y);
@@ -62,6 +66,8 @@ public:
             union_set: joins two sets if they are not from the same set
                        The rule for join is to join the smaller set into the
                        larger.
+
+            Complexity: O(N) because if find_set (time amortization)
         */
 
         int root1 = find_set(x);
@@ -133,3 +139,7 @@ int main()
 
     return 0;
 }
+
+/*
+    Tested on: UVA599, UVA10583
+*/
