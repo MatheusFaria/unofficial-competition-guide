@@ -5,6 +5,8 @@ This section shows the implementation of the most used data structures on compet
 On each sub-section you can find raw implementations and the use of the STL data
 structures.
 
+Contents:
+
 .. toctree::
    :maxdepth: 2
 
