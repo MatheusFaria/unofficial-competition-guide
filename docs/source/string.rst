@@ -8,3 +8,4 @@ Contents:
    :maxdepth: 2
 
    string-matching
+   string-period
