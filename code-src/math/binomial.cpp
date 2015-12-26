@@ -8,6 +8,10 @@ vector< vector<int> > C;
 // Dynamic Programming Solution, avoids overflow and saves spaces
 int binomial(int n, int k)
 {
+    /*
+        Complexity: O(min(n, k))
+    */
+
     k = min(k, n - k);
     if(n < 0 || k < 0 || k > n) return 0;
 
@@ -24,11 +28,18 @@ int binomial(int n, int k)
 
     return C[n][k];
 }
+/*
+    Tested on: UVA530
+*/
 
-// O(n) formula, Produtc of (n - (k - i))/i for i going from 1 to k
+// O(n) formula, product of (n - (k - i))/i for i going from 1 to k
 // !! Overflows depeding on n and k
 int binomial2(int n, int k)
 {
+    /*
+        Complexity: O(min(n, k))
+    */
+
     k = min(k, n - k);
 
     if(n < 0 || k < 0 || k > n) return 0;

@@ -9,4 +9,7 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   basic-math
    primes
+   binomial
+   sieves

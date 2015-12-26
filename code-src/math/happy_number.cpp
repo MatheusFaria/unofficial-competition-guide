@@ -30,3 +30,7 @@ int main()
     cout << happy_number("557") << endl; // unhappy
     return 0;
 }
+
+/*
+    Tested on: UVA944
+*/

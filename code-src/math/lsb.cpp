@@ -11,3 +11,7 @@ int main()
 
     return 0;
 }
+
+/*
+    Tested on: URI1500, URI1804, UVA12086
+*/

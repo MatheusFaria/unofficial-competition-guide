@@ -14,3 +14,7 @@ int main()
 
     return 0;
 }
+
+/*
+    Tested on: UVA11417, UVA10976
+*/

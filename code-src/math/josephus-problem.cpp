@@ -5,6 +5,10 @@ using namespace std;
 
 unsigned long int josephus_k_2(int n)
 {
+    /*
+        Complexity: O(1)
+    */
+
     // Turn off the MSB and append one bit 1 at the end
 
     bitset<50> bits(n);
@@ -32,3 +36,7 @@ int main()
 
     return 0;
 }
+
+/*
+    Tested on: URI1672
+*/
