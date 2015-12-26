@@ -8,6 +8,10 @@ using namespace std;
 int dst[MAX];
 void merge_sort(int src[], int a, int b)
 {
+    /*
+        Complexity: O(n log n)
+    */
+
     int n = b - a;
     if(n == 0)
         return;
