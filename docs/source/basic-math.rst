@@ -6,7 +6,7 @@ Greatest Common Divisor (GCD)
 
 .. note::
 
-    Tested on: UVA11417, UVA10976
+    Tested on: UVA11417, UVA10976, UVA12060
 
 .. code-block:: cpp
 

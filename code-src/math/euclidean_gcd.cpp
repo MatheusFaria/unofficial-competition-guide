@@ -16,5 +16,5 @@ int main()
 }
 
 /*
-    Tested on: UVA11417, UVA10976
+    Tested on: UVA11417, UVA10976, UVA12060
 */
