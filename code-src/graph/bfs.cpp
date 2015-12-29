@@ -1,66 +1,82 @@
-#include <iostream>      // cout, endl
-#include <algorithm>     // find
-#include <vector>        // vector
-#include <queue>         // queue
-#include <unordered_set> // set
+#include <iostream> // cout, endl
+#include <vector>   // vector
+#include <queue>    // queue
+#include <cstring>  // memset
 
-
-void bsf(std::vector<int> * G, int N)
+void bfs_traversal(vector< vector<int> > G)
 {
-    // Assuming that the nodes are sequentially created 1..(N - 1),
-    // and 0 is a sentinel
+    /*
+        Traverse the graph using breadth first as criteria. Each node is only
+        visite once.
 
-    std::unordered_set<int> visited_nodes;
+        Coplexity: O(V + E)
+        V: G.size()
+        E: number of edges
+    */
 
-    // Counts how many disconnected graphs there are in G
-    int sub_graphs_counter = 0;
+    queue<int> to_traverse;
+    bool * visited = new bool[G.size()];
+    memset(visited, 0, G.size());
 
-    std::queue<int> to_visit;
-
-    // While there are unvisited nodes
-    for(int i = 1; i < N; ++i)
+    for(unsigned int node_i = 0; node_i < G.size(); ++node_i)
     {
-        if(visited_nodes.count(i)) continue;
+        if(visited[node_i]) continue;
 
-        sub_graphs_counter++;
-        std::cout << "Sub-graph " << sub_graphs_counter << std::endl;
+        visited[node_i] = true;
+        to_traverse.push(node_i);
 
-        // Visiting the first node
-        int node = i;
-        std::cout << node << " ";
-
-        visited_nodes.insert(node);
-
-        // Scheduling the node to visit its adjacents
-        to_visit.push(node);
-
-        while(!to_visit.empty())
+        while(!to_traverse.empty())
         {
-            // Getting a node that was schedule
-            node = to_visit.front();
-            to_visit.pop();
+            auto node = to_traverse.front();
+            to_traverse.pop();
 
-            // Visiting the adjacents of the node
-            for(unsigned int j = 0; j < G[node].size(); j++)
+            for(auto i: G[node])
             {
-                int adjacent_node = G[node][j];
-
-                // If the adjacent node was not visit yet
-                if(!visited_nodes.count(adjacent_node))
+                if(!visited[i])
                 {
-                    // Visit the adjacent node
-                    std::cout << adjacent_node << " ";
-                    visited_nodes.insert(adjacent_node);
-
-                    // Schedule the adjacent node to check its neighbors
-                    to_visit.push(adjacent_node);
+                    visited[i] = true;
+                    to_traverse.push(i);
                 }
             }
         }
-
-        std::cout << std::endl;
     }
 }
+
+void bfs(vector< vector<int> > G, int start_node)
+{
+    /*
+        Does the breadth first starting on the start_node
+
+        Coplexity: O(V + E)
+        V: G.size()
+        E: number of edges
+    */
+
+    stack<int> to_traverse;
+    bool * visited = new bool[G.size()];
+    memset(visited, 0, G.size());
+
+    visited[start_node] = true;
+    to_traverse.push(start_node);
+
+    while(!to_traverse.empty())
+    {
+        auto node = to_traverse.front();
+        to_traverse.pop();
+
+        for(auto i: G[node])
+        {
+            if(!visited[i])
+            {
+                visited[i] = true;
+                to_traverse.push(i);
+            }
+        }
+    }
+}
+/*
+    Tested on: UVA11902
+*/
 
 int main()
 {
@@ -69,9 +85,9 @@ int main()
     std::vector<int> * G = new std::vector<int>[N];
 
     // Making connections
-    G[0] = std::vector<int> { }; // Sentinel
-    G[1] = std::vector<int> { 4, 3, 2 };
-    G[2] = std::vector<int> { 5, 6, 4 };
+    G[0] = std::vector<int> { 1 };
+    G[1] = std::vector<int> { 2, 3, 4 };
+    G[2] = std::vector<int> { 1, 5, 6, 4 };
     G[3] = std::vector<int> { 1 };
     G[4] = std::vector<int> { 7, 6, 1, 2 };
     G[5] = std::vector<int> { 2 };
@@ -80,11 +96,8 @@ int main()
     G[8] = std::vector<int> { 9 };
     G[9] = std::vector<int> { 8 };
 
-    std::cout << "BSF" << std::endl;
-    bsf(G, N);
+    bfs(G, 0);
+    bfs_traversal(G);
 
     delete[] G;
-
-    return 0;
 }
-
