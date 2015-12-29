@@ -1,73 +1,93 @@
-#include <iostream>      // cout, endl
-#include <algorithm>     // find
-#include <vector>        // vector
-#include <stack>         // stack
-#include <unordered_set> // set
+#include <iostream> // cout, endl
+#include <vector>   // vector
+#include <stack>    // stack
+#include <cstring>  // memset
 
-void dfs_adjacency_list(std::vector<int> * G, int N)
+using namespace std;
+
+void dfs_traversal(vector< vector<int> > G)
 {
-    // Assuming that the nodes are sequentially created 1..(N - 1),
-    // and 0 is a sentinel
+    /*
+        Traverse the graph using depth first as criteria. Each node is only
+        visite once.
 
-    std::unordered_set<int> visited_nodes;
+        Coplexity: O(V + E)
+        V: G.size()
+        E: number of edges
+    */
 
-    // Stack of nodes starts empty
-    std::stack<int> node_stack;
+    stack<int> to_traverse;
+    bool * visited = new bool[G.size()];
+    memset(visited, 0, G.size());
 
-    // Subgraphs counter
-    int sub_graphs_counter = 0;
-
-    // While there are unvisited nodes
-    for(int i = 1; i < N; ++i)
+    for(unsigned int node_i = 0; node_i < G.size(); ++node_i)
     {
-        if(visited_nodes.count(i)) continue;
+        if(visited[node_i]) continue;
 
-        // Counting the subgraphs
-        sub_graphs_counter++;
-        std::cout << "Subgraph " << sub_graphs_counter << std::endl;
+        visited[node_i] = true;
+        to_traverse.push(node_i);
 
-        // Visting a node
-        int node = i;
-        visited_nodes.insert(node);
-        std::cout << node << " ";
-
-        // Putting a node into the stack to check its adjacents
-        node_stack.push(node);
-
-        while(!node_stack.empty())
+        while(!to_traverse.empty())
         {
-            // Removing a node from the stack to check its adjacetns
-            node = node_stack.top();
-            node_stack.pop();
+            auto node = to_traverse.top();
+            to_traverse.pop();
 
-            // Checking the adjacents
-            for(auto adjacent: G[node])
+            for(auto i: G[node])
             {
-                // If the adjcent is not visited yet
-                if(!visited_nodes.count(adjacent))
+                if(!visited[i])
                 {
-                    // Visit the adjcent
-                    std::cout << adjacent << " ";
-                    visited_nodes.insert(adjacent);
-
-                    // Push the adjacent into the stack
-                    node_stack.push(adjacent);
+                    visited[i] = true;
+                    to_traverse.push(i);
                 }
             }
         }
-
-        std::cout << std::endl;
     }
 }
+
+void dfs(vector< vector<int> > G, int start_node)
+{
+    /*
+        Does the depth first starting on the start_node
+
+        Coplexity: O(V + E)
+        V: G.size()
+        E: number of edges
+    */
+
+    stack<int> to_traverse;
+    bool * visited = new bool[G.size()];
+    memset(visited, 0, G.size());
+
+    visited[start_node] = true;
+    to_traverse.push(start_node);
+
+    while(!to_traverse.empty())
+    {
+        auto node = to_traverse.top();
+        to_traverse.pop();
+
+        for(auto i: G[node])
+        {
+            if(!visited[i])
+            {
+                visited[i] = true;
+                to_traverse.push(i);
+            }
+        }
+    }
+}
+/*
+    Tested on: UVA11902
+*/
 
 int main()
 {
     // Creating a graph G with N nodes
     int N = 10;
-    std::vector<int> * G = new std::vector<int>[N];
+    std::vector< std::vector<int> > G(N);
 
     // Making connections
-    G[0] = std::vector<int> { }; // Sentinel
+    G[0] = std::vector<int> { 1 };
     G[1] = std::vector<int> { 2, 3, 4 };
     G[2] = std::vector<int> { 1, 5, 6, 4 };
     G[3] = std::vector<int> { 1 };
@@ -78,9 +98,9 @@ int main()
     G[8] = std::vector<int> { 9 };
     G[9] = std::vector<int> { 8 };
 
-    std::cout << "DSF" << std::endl;
-    dfs_adjacency_list(G, N);
+    dfs(G, 0);
+    dfs_traversal(G);
 
-    delete[] G;
+    return 0;
 }
 
