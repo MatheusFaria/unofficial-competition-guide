@@ -1,5 +1,6 @@
-#include <iostream>
-#include <limits>
+#include <iostream>  // cout, endl
+#include <limits>    // numeric_limits
+#include <algorithm> // max
 
 #define MAX 108
 
@@ -8,11 +9,6 @@ using namespace std;
 // No initialization needed
 // This matrix will be overwrited in the process
 int matrix[MAX][MAX];
-
-/*
-TESTED ON:
-UVA: 108
-*/
 
 int max_range_sum_2D(int n_lines, int n_colunms)
 {
@@ -65,3 +61,7 @@ int main()
 
     return 0;
 }
+
+/*
+    Tested on: UVA108
+*/

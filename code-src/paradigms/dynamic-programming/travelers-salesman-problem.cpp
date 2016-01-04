@@ -1,16 +1,12 @@
-#include <iostream>
-#include <limits>
+#include <iostream>  // cout, endl
+#include <limits>    // numeric_limts
+#include <algorithm> // min
 
 using namespace std;
 
 #define N_CITIES 11
 
 int distances[N_CITIES][N_CITIES];
-
-/*
-TESTED ON:
-UVA: 10496
-*/
 
 // Given N cities, what is the shortes path passing through them all?
 // All the cities must be interconnected with each other
@@ -46,3 +42,7 @@ int main()
     cout << tsp(0, 1, n) << endl;
     return 0;
 }
+
+/*
+    Tested on: UVA10496
+*/

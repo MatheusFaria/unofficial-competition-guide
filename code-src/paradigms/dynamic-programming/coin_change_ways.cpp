@@ -1,7 +1,5 @@
-#include <iostream>
-#include <cstdio>
-#include <cstring>
-#include <string>
+#include <iostream> // cout, endl
+#include <cstring>  // memset
 
 using namespace std;
 
@@ -9,11 +7,6 @@ using namespace std;
 #define MAX_COINS 15
 
 long long int ways_memoized[MAX_COINS][MAX]; // initialized with memset -1
-
-/*
-TESTED ON:
-UVA: 147
-*/
 
 // How many ways do I have to give the same exact change?
 long long int coin_change_ways(int value, int i_n_coins, int coins[], int n_coins)
@@ -41,10 +34,8 @@ long long int coin_change_ways(int value, int i_n_coins, int coins[], int n_coin
 int main()
 {
     string num;
-    //int n_coins = 11;
-    //int coins[] = {5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000};
-    int n_coins = 3;
-    int coins[] = {1, 2, 3};
+    int n_coins = 11;
+    int coins[] = {5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000, 10000};
 
     memset(ways_memoized, -1, sizeof(long long int)*MAX*MAX_COINS);
 
@@ -59,3 +50,7 @@ int main()
 
     return 0;
 }
+
+/*
+    Tested on: UVA147
+*/

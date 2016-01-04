@@ -1,6 +1,6 @@
-#include <iostream>
-#include <cstring>
-#include <cstdio>
+#include <iostream>  // cout, endl
+#include <cstring>   // memset
+#include <algorithm> // max
 
 #define MAX 5
 #define MAX_WEIGHT 11
@@ -10,8 +10,7 @@ using namespace std;
 int knapsack[MAX][MAX_WEIGHT]; // intialization at main with memset -1
 
 /*
-TESTED ON:
-UVA: 562
+    Tested on: UVA562
 */
 
 int knapsack_iterative(int weights[], int values[], int n_items, int max_weight)
@@ -39,8 +38,7 @@ int knapsack_iterative(int weights[], int values[], int n_items, int max_weight)
 }
 
 /*
-TESTED ON:
-UVA: 10819
+    Tested on: UVA10819
 */
 
 int knapsack_recursive(int weights[], int values[], int n_items, int bag_weight)

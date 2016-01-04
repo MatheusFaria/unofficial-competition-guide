@@ -1,6 +1,6 @@
-#include <iostream>
-#include <limits>
-#include <cstring>
+#include <iostream>  // cout, endl
+#include <cstring>   // memset
+#include <algorithm> // min
 
 using namespace std;
 
@@ -8,12 +8,7 @@ using namespace std;
 
 int change_dp[MAX_VALUE]; // initialization memset with value -1
 
-/*
-TESTED ON:
-URI: 1034
-*/
-
-// This one needs the coin of value 1 in the first position of the coin set
+// Needs the coin of value 1 in the first position of the coin set
 int coin_change_cache_friendly(int value, int coins[], int n_coins)
 {
     for(int i = 0; i <= value; i++)
@@ -42,3 +37,7 @@ int main()
     cout << coin_change_cache_friendly(4, coins_1, n_coins_1) << endl; //outputs 2
     return 0;
 }
+
+/*
+    Tested on: URI1034
+*/

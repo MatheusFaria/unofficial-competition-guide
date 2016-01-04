@@ -2,21 +2,15 @@
 
 using namespace std;
 
-/*
-
--- 1D Max Range Sum (Kadane) --
-
-Uses dynamic programming to find the largest sum on the largest interval.
-
--- Complexity --
-
-O(n)
-
-*/
-
 int max_1D_range_sum_kadane(int values[], int N)
 {
-    int sum = 0, sumMax = 0;
+    /*
+        Uses dynamic programming to find the largest sum on the largest interval.
+
+        Complexity: O(n)
+    */
+
+    int sum = 0, max_sum = 0;
     int a = 0;
     int sequence_init = 0, sequence_end = 0;
 
@@ -29,14 +23,14 @@ int max_1D_range_sum_kadane(int values[], int N)
             sum = 0;
         }
 
-        if(sumMax < sum)
+        if(max_sum < sum)
         {
             sequence_init = a;
             sequence_end = i;
 
-            sumMax = sum;
+            max_sum = sum;
         }
-        else if(sumMax == sum)
+        else if(max_sum == sum)
         {
             if(i - a > sequence_end - sequence_init)
             {
@@ -46,7 +40,7 @@ int max_1D_range_sum_kadane(int values[], int N)
         }
     }
 
-    return sumMax;
+    return max_sum;
 }
 
 int main()
@@ -57,3 +51,7 @@ int main()
     cout << "Sum: " << max_1D_range_sum_kadane(values, N) << endl;
     return 0;
 }
+
+/*
+    Tested on: UVA507
+*/

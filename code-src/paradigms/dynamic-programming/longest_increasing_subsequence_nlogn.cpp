@@ -105,3 +105,7 @@ int main()
 
     return 0;
 }
+
+/*
+    Tested on: UVA231
+*/
