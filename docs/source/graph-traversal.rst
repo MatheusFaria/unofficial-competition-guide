@@ -10,3 +10,4 @@ Contents:
 
    dfs
    bfs
+   connected-components
