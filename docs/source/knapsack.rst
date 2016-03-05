@@ -11,7 +11,7 @@ Iterative version:
 
 .. note::
 
-    Tested on: UVA562
+    Tested on: UVA562, URI1286
 
 .. code-block:: cpp
 

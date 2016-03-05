@@ -10,7 +10,7 @@ using namespace std;
 int knapsack[MAX][MAX_WEIGHT]; // intialization at main with memset -1
 
 /*
-    Tested on: UVA562
+    Tested on: UVA562, URI1286
 */
 
 int knapsack_iterative(int weights[], int values[], int n_items, int max_weight)
