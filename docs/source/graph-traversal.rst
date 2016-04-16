@@ -12,3 +12,8 @@ Contents:
    bfs
    connected-components
    flood-fill
+   bipartite-check
+   topological-sort
+   ssc
+   find-articulation-points-and-bridges
+   edge-labeling
