@@ -1,79 +1,79 @@
-#include <cstdio>
-#include <vector>
-#include <cstring>
+#include <cstdio>    // scanf, printf
+#include <vector>    // vector
+#include <algorithm> // min
+#include <cstring>   // memset
+#include <set>       // set
+#include <utility>   // pair, make_pair
 
 using namespace std;
 
 #define MAX 110
 #define UNVISITED -1
 
-int node_state[MAX];     // memset to UNVISITED
-int node_low_state[MAX]; // memset to UNVISITED
-int parent_node[MAX];    // memset to -1
-bool articulation[MAX];  // memset to false
-
 vector<int> G[MAX];
-int n_nodes; // Graph Size
+int node_num[MAX]; // memset to -1
+int node_low[MAX]; // memset to -1
+int parent[MAX];   // memset to -1
 
-int dfs_counter;   // initialize with 0
-int root_children; // initialize with 0
+int dfs_counter;         // start at 0
+int dfs_root;            // stores the first node visited
+int root_children_count; // counts the root children
 
-int dfs_root;
+bool articulations[MAX]; // memset to false; stores the articulations
+set< pair<int, int> > bridges;  // stores the bridges
 
-void find_articulation_point_and_bridge(int node) {
-    node_state[node] = node_low_state[node] = dfs_counter++;
+void find_articulation_and_bridges_dfs(int node)
+{
+    /*
+        Find vertices and edges that if deleted the graph becomes
+        disconnected
+
+        !Only works on undirected graphs!
+
+        Complexity: O(E + V)
+    */
+
+    node_num[node] = node_low[node] = dfs_counter++;
 
     for(auto adjacent: G[node])
     {
-        if(node_state[adjacent] == UNVISITED)
+        if(node_num[adjacent] == UNVISITED)
         {
-            parent_node[adjacent] = node;
-            if(node == dfs_root)
-            {
-                root_children++;
-            }
+            parent[adjacent] = node;
+            if(node == dfs_root) root_children_count++;
 
-            find_articulation_point_and_bridge(adjacent);
+            find_articulation_and_bridges_dfs(adjacent);
 
-            if(node_low_state[adjacent] >= node_state[node])
-            {
-                articulation[node] = true;
-            }
-            if(node_low_state[adjacent] > node_state[node])
-            {
-                // Bridge
-            }
+            if(node_low[adjacent] >= node_num[node]) // Articulation found
+                articulations[node] = true;
+            if(node_low[adjacent] > node_num[node]) // Bridge found
+                bridges.insert(make_pair(node, adjacent));
 
-            node_low_state[node] = min(node_low_state[node],
-                                       node_low_state[adjacent]);
+            node_low[node] = min(node_low[node], node_low[adjacent]);
         }
-        else if(adjacent != parent_node[node])
-            node_low_state[node] = min(node_low_state[node], node_state[adjacent]);
+        // If the adj was already visted and is not a bidirectional
+        // edge pointing to the node that called the adj
+        else if(adjacent != parent[node])
+            node_low[node] = min(node_low[node], node_num[adjacent]);
     }
 }
 
-void find_all_articulation_and_bridges()
+void find_articulation_and_bridges(int start_node)
 {
-    memset(articulation, false, sizeof articulation);
-    memset(node_state, UNVISITED, sizeof node_state);
-    memset(node_low_state, UNVISITED, sizeof node_low_state);
-    memset(parent_node, -1, sizeof parent_node);
+    /* Setup the variables to use the method */
 
-    dfs_counter = 0;
-    root_children = 0;
+    memset(node_num, UNVISITED, sizeof node_num);
+    memset(node_low, UNVISITED, sizeof node_low);
+    memset(parent, UNVISITED, sizeof parent);
+    memset(articulations, false, sizeof articulations);
+    bridges.clear();
 
-    for(int i = 0; i < n_nodes; ++i)
-    {
-        if(node_state[i] == UNVISITED)
-        {
-            dfs_root = i;
-            root_children = 0;
-            find_articulation_point_and_bridge(i);
+    dfs_counter = root_children_count = 0;
 
-            articulation[dfs_root] = root_children > 1;
-        }
-    }
+    dfs_root = start_node;
+    find_articulation_and_bridges_dfs(dfs_root);
 
+    articulations[dfs_root] = root_children_count > 1;
 }
 
 int main()
@@ -82,5 +82,5 @@ int main()
 }
 
 /*
-    Tested on: UVA315
+    Tested on: UVA315, URI1709
 */

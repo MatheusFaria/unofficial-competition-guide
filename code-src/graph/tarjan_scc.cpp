@@ -1,27 +1,26 @@
+#include <cstdio>    // scanf, printf
 #include <vector>    // vector
 #include <cstring>   // memset
 #include <algorithm> // min
 
+#define MAX 1000
+#define UNVISITED -1
+
 using namespace std;
 
-#define MAX 2010
-#define UNVISITED 0
+vector<int> G[MAX];
 
-int node_state[MAX];    // memset to UNVISITED
-int node_low[MAX];      // memset to UNVISITED
+int node_num[MAX]; // memset to UNVISITED
+int node_low[MAX]; // memset to UNVISITED
 
 // flags if a node doesn't have its SCC defined yet
-bool not_in_a_scc[MAX]; // memset to false
+bool not_in_scc[MAX];   // memset to false
+vector<int> node_stack; // Stores the nodes in the SCC
 
-vector<int> node_stack;
+int dfs_counter; // start at 0
+int scc_counter; // start at 0
 
-vector<int> G[MAX];
-int n_nodes; // Graph Size
-
-int dfs_counter; // initiliaze with 0
-int scc_counter; // initiliaze with 0
-
-void tarjan_SCC(int node)
+void tarjan_SCC_dfs(int node)
 {
     /*
         Counts and identifies the Strogly Connected Components
@@ -29,50 +28,54 @@ void tarjan_SCC(int node)
         Complexity: O(E + V)
     */
 
-    node_low[node] = node_state[node] = ++dfs_counter;
+    node_low[node] = node_num[node] = dfs_counter++;
     node_stack.push_back(node);
-    not_in_a_scc[node] = true; // the node is looking for its scc
+
+    // This node is looking for a SCC
+    not_in_scc[node] = true;
 
     for(auto adjacent: G[node])
     {
-        if(node_state[adjacent] == UNVISITED)
-            tarjan_SCC(adjacent);
+        if(node_num[adjacent] == UNVISITED)
+            tarjan_SCC_dfs(adjacent);
 
-        if(not_in_a_scc[adjacent])
+        // If the adjacent is looking for a SCC, the node_low is update with
+        // the adjacent node_low
+        if(not_in_scc[adjacent])
             node_low[node] = min(node_low[node], node_low[adjacent]);
     }
 
-    if(node_low[node] == node_state[node])
+    if(node_low[node] == node_num[node])
     {
+        // A new SCC was found
+
         scc_counter++;
-        while(1)
-        {
-            auto adjacent = node_stack.back();
+        int ssc_node;
+
+        // Iterates over the SCC found
+        do {
+            ssc_node = node_stack.back();
             node_stack.pop_back();
-            not_in_a_scc[adjacent] = false; // the adjacent found its scc
-            if(node == adjacent) break;
-        }
+            not_in_scc[ssc_node] = false;
+        } while(node != ssc_node);
     }
 }
 
-void find_all_SCC()
+void tarjan_SCC(int N)
 {
-    /*
-        Runs the Tarjan SCC Algorithm in the whole graph
-    */
+    /* Finds all SCC in a graph of size N */
 
-    scc_counter = dfs_counter = 0;
-    memset(not_in_a_scc, false, sizeof not_in_a_scc);
-    memset(node_state, UNVISITED, sizeof node_state);
+    memset(node_num, UNVISITED, sizeof node_num);
     memset(node_low, UNVISITED, sizeof node_low);
+    memset(not_in_scc, false, sizeof not_in_scc);
 
-    for(int i = 0; i < n_nodes; ++i)
-    {
-        if(node_state[i] == UNVISITED)
-        {
-            tarjan_SCC(i);
-        }
-    }
+    node_stack.clear();
+
+    dfs_counter = scc_counter = 0;
+
+    for(int i = 0; i < N; ++i)
+        if(node_num[i] == UNVISITED)
+            tarjan_SCC_dfs(i);
 }
 
 int main()
@@ -81,5 +84,5 @@ int main()
 }
 
 /*
-    Tested on: UVA11838
+    Tested on: UVA11838, UVA247
 */
