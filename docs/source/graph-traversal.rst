@@ -14,6 +14,6 @@ Contents:
    flood-fill
    bipartite-check
    topological-sort
-   ssc
+   scc
    find-articulation-points-and-bridges
    edge-labeling

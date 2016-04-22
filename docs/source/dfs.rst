@@ -1,11 +1,6 @@
 Depth First Search
 ==================
 
-It is a way of traversing a graph with depth first as criteria.
-
-The codes presented on this section use the adjency list graph representation,
-but can be adpated for the others representations as well.
-
 DFS
 ---
 
@@ -15,93 +10,56 @@ DFS
 
 .. code-block:: cpp
 
-    #include <vector>  // vector
-    #include <stack>   // stack
-    #include <cstring> // memset
+    #include <vector>   // vector
+    #include <cstring>  // memset
 
-    void dfs(vector< vector<int> > G, int start_node)
+    using namespace std;
+
+    #define MAX 10010
+
+    vector<int> G[MAX]; // memset to 0
+    bool visited[MAX];  // memset to false
+
+    bool dfs(int node, int dest_node)
     {
         /*
-            Does the depth first starting on the start_node
+            Does the depth first search recursivily to find the dest_node starting
+            from the current node
 
             Coplexity: O(V + E)
-            V: G.size()
-            E: number of edges
         */
 
-        stack<int> to_traverse;
-        bool * visited = new bool[G.size()];
-        memset(visited, 0, G.size());
+        if(node == dest_node) return true;
 
-        visited[start_node] = true;
-        to_traverse.push(start_node);
+        visited[node] = true;
 
-        while(!to_traverse.empty())
-        {
-            auto node = to_traverse.top();
-            to_traverse.pop();
+        for(auto adjacent: G[node])
+            if(!visited[adjacent])
+                if(dfs(adjacent, dest_node)) return true;
 
-            for(auto i: G[node])
-            {
-                if(!visited[i])
-                {
-                    visited[i] = true;
-                    to_traverse.push(i);
-                }
-            }
-        }
+        return false;
     }
 
 
 DFS Traversal
 -------------
 
-.. warning::
-
-    NOT TESTED
-
 .. code-block:: cpp
 
-    #include <vector>   // vector
-    #include <stack>    // stack
-    #include <cstring>  // memset
-
-    void dfs_traversal(vector< vector<int> > G)
+    void dfs_traversal(int N)
     {
         /*
-            Traverse the graph using depth first as criteria. Each node is only
-            visite once.
+            Traverse the graph using depth first as criteria
 
             Coplexity: O(V + E)
-            V: G.size()
-            E: number of edges
         */
 
-        stack<int> to_traverse;
-        bool * visited = new bool[G.size()];
-        memset(visited, 0, G.size());
+        memset(visited, false, sizeof visited);
 
-        for(unsigned int node_i = 0; node_i < G.size(); ++node_i)
+        for(int i = 0; i < N; ++i)
         {
-            if(visited[node_i]) continue;
-
-            visited[node_i] = true;
-            to_traverse.push(node_i);
-
-            while(!to_traverse.empty())
-            {
-                auto node = to_traverse.top();
-                to_traverse.pop();
-
-                for(auto i: G[node])
-                {
-                    if(!visited[i])
-                    {
-                        visited[i] = true;
-                        to_traverse.push(i);
-                    }
-                }
-            }
+            if(visited[i]) continue;
+            dfs(i, -1);
         }
     }
 
