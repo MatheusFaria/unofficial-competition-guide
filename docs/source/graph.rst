@@ -9,3 +9,4 @@ Contents:
    :maxdepth: 2
 
    graph-traversal
+   minimum-spanning-tree-section
