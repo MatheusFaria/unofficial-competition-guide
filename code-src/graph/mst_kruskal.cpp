@@ -1,4 +1,10 @@
-#define MAX 40010
+#include <vector>     // vector
+#include <algorithm>  // sort
+#include <utility>    // pair
+
+using namespace std;
+
+#define MAX 400010
 
 class UFDS {
 public:
@@ -41,6 +47,35 @@ public:
     }
 };
 
+// Graph as an edge list with a cost
+// the elements are (weight, (node1, node2))
+vector< pair<int, pair<int, int> > > G;
+
+int kruskal_mst_cost(int N)
+{
+    /*
+        Complexity: O(E log V)
+    */
+
+    // !!! If the edges' weight lies in a small range, you can use counting
+    // sort to speed up the process
+    sort(G.begin(), G.end());
+
+    int cost = 0;
+    UFDS ufds(N);
+
+    for(auto edge: G)
+    {
+        if(!ufds.same_set(edge.second.first, edge.second.second))
+        {
+            cost += edge.first;
+            ufds.union_set(edge.second.first, edge.second.second);
+        }
+    }
+
+    return cost;
+}
+
 
 int main()
 {
@@ -48,5 +83,5 @@ int main()
 }
 
 /*
-    Tested on: UVA599, UVA10583, UVA11503, URI1764
+    Tested on: UVA11631, URI1152, URI1764
 */

@@ -1,6 +1,55 @@
 Minimum Spanning Tree
 =====================
 
+Kruskal's Algorithm
+-------------------
+
+.. note::
+
+    Tested on: UVA11631, URI1152, URI1764
+
+.. warning::
+
+    You need the :doc:`union-find-disjoint-set` code for this algorithm
+
+.. code-block:: cpp
+
+    #include <vector>     // vector
+    #include <algorithm>  // sort
+    #include <utility>    // pair
+
+    using namespace std;
+
+    // Graph as an edge list with a cost
+    // the elements are (weight, (node1, node2))
+    vector< pair<int, pair<int, int> > > G;
+
+    int kruskal_mst_cost(int N)
+    {
+        /*
+            Complexity: O(E log V)
+        */
+
+        // !!! If the edges' weight lies in a small range, you can use counting
+        // sort to speed up the process
+        sort(G.begin(), G.end());
+
+        int cost = 0;
+        UFDS ufds(N);
+
+        for(auto edge: G)
+        {
+            if(!ufds.same_set(edge.second.first, edge.second.second))
+            {
+                cost += edge.first;
+                ufds.union_set(edge.second.first, edge.second.second);
+            }
+        }
+
+        return cost;
+    }
+
+
 Prim's Algorithm
 ----------------
 
