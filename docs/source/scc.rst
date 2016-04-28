@@ -62,14 +62,14 @@ Tarjan's Algorithm
             // A new SCC was found
 
             scc_counter++;
-            int ssc_node;
+            int scc_node;
 
             // Iterates over the SCC found
             do {
-                ssc_node = node_stack.back();
+                scc_node = node_stack.back();
                 node_stack.pop_back();
-                not_in_scc[ssc_node] = false;
-            } while(node != ssc_node);
+                not_in_scc[scc_node] = false;
+            } while(node != scc_node);
         }
     }
 
