@@ -1,7 +1,7 @@
 C Operators
 ===========
 
-Comma `,` operator
+Comma (,) operator
 ------------------
 
 This operator evaluates all expressions and discards all the returns, except
