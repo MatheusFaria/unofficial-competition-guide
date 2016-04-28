@@ -58,5 +58,5 @@ int main()
 }
 
 /*
-    Tested on: UVA11060
+    Tested on: UVA11060, URI1903
 */

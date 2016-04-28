@@ -58,7 +58,7 @@ Khan's Topological Sort
 
 .. note::
 
-    Tested on: UVA11060
+    Tested on: UVA11060, URI1903
 
 .. code-block:: cpp
 
