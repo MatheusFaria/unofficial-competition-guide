@@ -14,7 +14,7 @@ You can open a pull request with changes made to the code or to the documentatio
 In case of:
 
 * new algorithms: be sure to test your code.
-* algorithm improvement: check if the old .
+* algorithm improvement or bug fix: check if the new code works on the questions that the code was already tested.
 * documentation error (typos, new explations): you just need to open the pull request.
 
 
