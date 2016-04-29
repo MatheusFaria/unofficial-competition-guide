@@ -9,26 +9,27 @@ Used to find the smallest convex polygon that envolves a set of points in a 2D p
 
 .. code-block:: cpp
 
-    
-	struct Point{
-	    int x, y;
-	    Point(){}
-	    Point(int _x, int _y){
-	        x = _x;
-	        y = _y;
-	    }
-	    bool operator <(const Point &p)const {
-	        return x < p.x || (x == p.x && y < p.y);
-	    }
-	};
+	/*
+	Complexity: O(n*log(n))
+	*/
 
-	ll cross(const Point &O, const Point &A, const Point &B){
+	#include <vector>
+	#include <algorithm>
+
+	using namespace std;
+
+	#define x first
+	#define y second
+	typedef pair<int, int> ii;
+	typedef long long ll;
+
+	ll cross(const ii &O, const ii &A, const ii &B){
 	    return (A.x - O.x)*(ll)(B.y - O.y) - (A.y - O.y)*(ll)(B.x - O.x);
 	}
 
-	vector<Point> convex_hull(vector<Point> P){
+	vector<ii> convex_hull(vector<ii> P){
 	    int n = P.size(), k=0;
-	    vector<Point> H(2*n);
+	    vector<ii> H(2*n);
 	    sort(P.begin(), P.end());
 	    for(int i=0; i<n; ++i){
 	        while(k >= 2 && cross(H[k-2], H[k-1], P[i]) <= 0) k--;
