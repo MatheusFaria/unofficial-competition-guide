@@ -1,5 +1,5 @@
 Convex Hull
-==========
+===========
 
 Used to find the smallest convex polygon that envolves a set of points in a 2D plane.
 
