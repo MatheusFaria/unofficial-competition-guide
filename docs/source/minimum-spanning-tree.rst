@@ -6,7 +6,7 @@ Kruskal's Algorithm
 
 .. note::
 
-    Tested on: UVA11631, URI1152, URI1764
+    Tested on: UVA11631, URI1152, URI1764, UVA908
 
 .. warning::
 
@@ -23,6 +23,7 @@ Kruskal's Algorithm
     // Graph as an edge list with a cost
     // the elements are (weight, (node1, node2))
     vector< pair<int, pair<int, int> > > G;
+    // You can also use a priority_queue as the main data structure
 
     int kruskal_mst_cost(int N)
     {
@@ -35,14 +36,21 @@ Kruskal's Algorithm
         sort(G.begin(), G.end());
 
         int cost = 0;
+        int edges_count = 0;
         UFDS ufds(N);
 
         for(auto edge: G)
         {
-            if(!ufds.same_set(edge.second.first, edge.second.second))
+            auto weight = edge.first;
+            auto u = edge.second.first, v = edge.second.second;
+
+            if(!ufds.same_set(u, v))
             {
-                cost += edge.first;
-                ufds.union_set(edge.second.first, edge.second.second);
+                cost += weight;
+                edges_count++;
+                if(edges_count == N - 1) break;
+
+                ufds.union_set(u, v);
             }
         }
 
