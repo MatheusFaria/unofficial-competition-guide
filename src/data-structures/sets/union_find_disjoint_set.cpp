@@ -3,18 +3,24 @@
 class UFDS {
 public:
     int parents[MAX];
-    int heights[MAX];
+    int heights[MAX]; // the size of each set
+    int n_sets;       // how many sets are in the UFDS
 
     UFDS(int size)
     {
+        // Zero base union find, the elements goes from 0 to N - 1
+        // If you need to change the the interval, increase the size OR
+        // change the for below
         for(int i = 0; i < size; ++i)
         {
             heights[i] = 1;
             parents[i] = i;
         }
+
+        n_sets = size;
     }
 
-    inline int find_set(int i) // find the set of node i
+    int find_set(int i) // find the set of node i
     {
         if(parents[i] != i)
             parents[i] = find_set(parents[i]);
@@ -37,6 +43,8 @@ public:
 
             parents[root2] = root1;
             heights[root1] += heights[root2];
+
+            n_sets--; // On each union the UFDS reduces one set in size
         }
     }
 };

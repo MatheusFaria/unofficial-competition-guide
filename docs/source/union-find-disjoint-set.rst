@@ -3,100 +3,58 @@ Union-Find Disjoint Set
 
 .. note::
 
-    Tested on: UVA599, UVA10583, UVA11503
-
+    Tested on: UVA599, UVA10583, UVA11503, URI1764
 
 
 .. code-block:: cpp
 
-    #include <iostream> // cout, endl
-    #include <cstring>  // memset
+    #define MAX 40010
 
-    using namespace std;
-
-    class UFDS{
+    class UFDS {
     public:
-        int size;
-        int * parents;
-        int * heights;
+        int parents[MAX];
+        int heights[MAX]; // the size of each set
+        int n_sets;       // how many sets are in the UFDS
 
-        UFDS(int s)
+        UFDS(int size)
         {
-            // Using 0 as sentinel
-            size = s + 1;
-
-            parents = new int[size];
-            memset(parents, 0, size*sizeof(int));
-
-            heights = new int[size];
-            memset(heights, 0, size*sizeof(int));
-        }
-
-        int find_set(int x)
-        {
-            /*
-                find_set: returns the root of the set that x belongs
-
-                Complexity: worst case O(N), but it is amortized with the usage
-            */
-
-            int root = parents[x];
-
-            // If it found a root, return it
-            if(x == root) return x;
-
-            // If the value of parents[x] is not setted yet, which means that it
-            // has the default value 0
-            if(root == 0){
-                parents[x] = x;
-                return x;
+            // Zero base union find, the elements goes from 0 to N - 1
+            // If you need to change the the interval, increase the size OR
+            // change the for below
+            for(int i = 0; i < size; ++i)
+            {
+                heights[i] = 1;
+                parents[i] = i;
             }
 
-            // x is not the root of the set, look to its father root and update the
-            // x root to be the set root
-            parents[x] = find_set(root);
-
-            // return x updated root
-            return parents[x];
+            n_sets = size;
         }
 
-        inline bool same_set(int x, int y)
+        int find_set(int i) // find the set of node i
         {
-            /*
-                same_set: checks if x and y belong to the same set
+            if(parents[i] != i)
+                parents[i] = find_set(parents[i]);
+            return parents[i];
+        }
 
-                Complexity: O(N) because if find_set (time amortization)
-            */
-
+        inline bool same_set(int x, int y) // checks if x and y are in the same set
+        {
             return find_set(x) == find_set(y);
         }
 
-        void union_set(int x, int y)
+        void union_set(int x, int y) // unite x and y in the same set
         {
-            /*
-                union_set: joins two sets if they are not from the same set
-                           The rule for join is to join the smaller set into the
-                           larger.
+            int root1 = find_set(x), root2 = find_set(y);
 
-                Complexity: O(N) because if find_set (time amortization)
-            */
-
-            int root1 = find_set(x);
-            int root2 = find_set(y);
-
-            // If is not from the same set
-            if(root1 != root2)
+            if(root1 != root2) // x and y are not in the same set
             {
-                if(heights[root1] >= heights[root2])
-                {
-                    parents[root2] = root1;
-                    heights[root1] += heights[root2];
-                }
-                else
-                {
-                    parents[root1] = root2;
-                    heights[root2] += heights[root1];
-                }
+                // The larger set absorb the smaller set
+                if(heights[root1] < heights[root2]) swap(root1, root2);
+
+                parents[root2] = root1;
+                heights[root1] += heights[root2];
+
+                n_sets--; // On each union the UFDS reduces one set in size
             }
         }
     };
