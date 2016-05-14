@@ -41,7 +41,7 @@ BFS
 
             for(auto adjacent: G[node])
             {
-                if(start_node == dest_node) return true;
+                if(adjacent == dest_node) return true;
                 else if(!visited[adjacent])
                 {
                     visited[adjacent] = true;
@@ -52,6 +52,7 @@ BFS
 
         return false;
     }
+
 
 BFS Traversal
 -------------

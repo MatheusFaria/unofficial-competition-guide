@@ -8,6 +8,10 @@ Union-Find Disjoint Set
 
 .. code-block:: cpp
 
+    #include <algorithm>
+
+    using namespace std;
+
     #define MAX 40010
 
     class UFDS {

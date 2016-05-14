@@ -1,3 +1,7 @@
+#include <algorithm>
+
+using namespace std;
+
 #define MAX 40010
 
 class UFDS {
