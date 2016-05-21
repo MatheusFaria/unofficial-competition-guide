@@ -7,3 +7,4 @@ Contents:
    :maxdepth: 2
 
    dijkstra-sssp
+   bellman-ford-sssp
