@@ -8,60 +8,48 @@ Union-Find Disjoint Set
 
 .. code-block:: cpp
 
-    #include <algorithm>
+	#include <iostream>
+	#include <vector>
 
-    using namespace std;
+	using namespace std;
+	using vi = vector<int>;
 
-    #define MAX 40010
+	class UFDS {
+		int m_count;
+		vi m_parents, m_rank;
 
-    class UFDS {
-    public:
-        int parents[MAX];
-        int heights[MAX]; // the size of each set
-        int n_sets;       // how many sets are in the UFDS
+		public:
+		UFDS(int V) : m_count(V), m_parents(V + 1, 0), m_rank(V + 1, 0){
+			for(int i=1; i<=V; i++)
+			m_parents[i] = i;
+		}
 
-        UFDS(int size)
-        {
-            // Zero base union find, the elements goes from 0 to N - 1
-            // If you need to change the the interval, increase the size OR
-            // change the for below
-            for(int i = 0; i < size; ++i)
-            {
-                heights[i] = 1;
-                parents[i] = i;
-            }
+		int find_set(int u){
+			return m_parents[u] == u ? u : (m_parents[u] = find_set(m_parents[u]));
+		}
 
-            n_sets = size;
-        }
+		inline bool same_set(int u, int v){
+			return find_set(u) == find_set(v);
+		}
 
-        int find_set(int i) // find the set of node i
-        {
-            if(parents[i] != i)
-                parents[i] = find_set(parents[i]);
-            return parents[i];
-        }
+		void union_set(int u, int v){
+			if(same_set(u, v))
+				return;
 
-        inline bool same_set(int x, int y) // checks if x and y are in the same set
-        {
-            return find_set(x) == find_set(y);
-        }
+			int p = find_set(u);
+			int q = find_set(v);
 
-        void union_set(int x, int y) // unite x and y in the same set
-        {
-            int root1 = find_set(x), root2 = find_set(y);
+			if(m_rank[p] >= m_rank[q])
+				m_parents[q] = p;
+			else
+				m_parents[p] = q;
 
-            if(root1 != root2) // x and y are not in the same set
-            {
-                // The larger set absorb the smaller set
-                if(heights[root1] < heights[root2]) swap(root1, root2);
+			if(m_rank[p] == m_rank[q]) ++m_rank[p];
+			--m_count;
+		}
 
-                parents[root2] = root1;
-                heights[root1] += heights[root2];
-
-                n_sets--; // On each union the UFDS reduces one set in size
-            }
-        }
-    };
+		int count() const {  return m_count; }
+	};
 
 
 Usage:
