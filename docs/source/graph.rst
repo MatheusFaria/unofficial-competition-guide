@@ -11,3 +11,5 @@ Contents:
    graph-traversal
    minimum-spanning-tree-section
    sssp
+   all-pairs-shortest-paths
+   max-flow
