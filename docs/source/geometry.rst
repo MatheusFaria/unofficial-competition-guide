@@ -1,7 +1,7 @@
 Computational Geometry
 ======================
 
-
+In this section you will find several algorithm related to computational geometry.
 
 Contents:
 
@@ -9,4 +9,5 @@ Contents:
    :maxdepth: 2
 
    basic-geometry
+   point
    line-sweep
