@@ -1,6 +1,33 @@
 Basic Math
 ==========
 
+Square
+------
+
+.. note::
+
+    Tested on: UVA152
+
+
+.. code-block:: cpp
+
+    #define SQUARE(x) ((x) * (x))
+
+
+Power of 2
+----------
+
+Check if a number is power of 2
+
+.. warning::
+
+    NOT TESTED
+
+.. code-block:: cpp
+
+    #define isPowerOf2(x) (((x) != 0) && (((x) & ((x) - 1)) == 0))
+
+
 Greatest Common Divisor (GCD)
 -----------------------------
 
