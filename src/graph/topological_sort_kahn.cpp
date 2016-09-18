@@ -1,13 +1,16 @@
-#include <iostream>   // cout, endl
 #include <queue>      // priority_queue
 #include <vector>     // vector
 #include <functional> // greater
+#include <cstring>    // memset
 
 #define MAX 110
 
 using namespace std;
 
-vector<int> topological_sort_kahn(vector<int> G[], int n_nodes, int indegree_count[])
+vector<int> G[MAX];
+int indegree_count[MAX]; // Counts how many in edges the node i has. (memset to 0)
+
+vector<int> topological_sort_kahn(int n_nodes)
 {
     /*
         Returns a topological order of the DAG G. This order follows some priority,

@@ -10,7 +10,6 @@ Topological Sort with DFS
 
 .. code-block:: cpp
 
-    #include <iostream> // cout, endl
     #include <vector>   // vector
     #include <cstring>  // memset
 
@@ -18,10 +17,11 @@ Topological Sort with DFS
 
     #define MAX 100
 
+    vector<int> G[MAX];
     bool visited[MAX]; // memset it to false
     vector<int> topological_sort_vector; // Stores the result
 
-    void topological_sort_dfs(vector< vector<int> > G, int node)
+    void topological_sort_dfs(int node)
     {
         /*
             Does the topological sort from a source node.
@@ -32,7 +32,7 @@ Topological Sort with DFS
         visited[node] = true;
         for(auto adjacent: G[node])
             if(!visited[adjacent])
-                topological_sort_dfs(G, adjacent);
+                topological_sort_dfs(adjacent);
 
         topological_sort_vector.push_back(node);
     }
@@ -62,16 +62,19 @@ Khan's Topological Sort
 
 .. code-block:: cpp
 
-    #include <iostream>   // cout, endl
     #include <queue>      // priority_queue
     #include <vector>     // vector
     #include <functional> // greater
+    #include <cstring>    // memset
 
     #define MAX 110
 
     using namespace std;
 
-    vector<int> topological_sort_kahn(vector<int> G[], int n_nodes, int indegree_count[])
+    vector<int> G[MAX];
+    int indegree_count[MAX]; // Counts how many in edges the node i has. (memset to 0)
+
+    vector<int> topological_sort_kahn(int n_nodes)
     {
         /*
             Returns a topological order of the DAG G. This order follows some priority,
